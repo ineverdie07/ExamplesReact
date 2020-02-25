@@ -138,14 +138,12 @@ class App extends Component {
     var totalt = 0
     array.forEach(product => totalt += product.order)
     this.setState({totalBuy: totalt})
-    //alert(array.length+'=>>'+ this.state.totalBuy +'|'+ totalt);
   }
 
   sumTotalSale(array) {
     var suma = 0
-    array.forEach(product => suma += product.price) //product.price
+    array.forEach(product => suma += product.price)
     this.setState({totalSale: suma})
-    //alert(array.length+'=>'+ this.state.totalSale +'|'+ suma);
   }
 
   handlerRemoveProduct(productId) {
