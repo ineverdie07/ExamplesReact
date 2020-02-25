@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Grid, Header } from 'semantic-ui-react'
+import { Container, Grid } from 'semantic-ui-react'
 import Menu from '../Menu'
 import ProductList from '../ProductList'
 import CartList from '../CartList'
@@ -9,46 +9,47 @@ import style from './App.css'
 class App extends Component {
   constructor(props) {
     super(props)
+	// Podemos definir en el state, todos los estados que deseamos actualizar en la pantalla.
     this.state = {
       openOrder: false,
-      total: 0,
-      sum: 0,
+      totalBuy: 0,
+      totalSale: 0,
       products: [
         {
           id: 1,
-          name: 'Nikon D5500 24.2 Mp',
-          picture: 'https://http2.mlstatic.com/camara-D_Q_NP_100101-MLM20255371968_032015-X.webp',
-          price: 12346,
+          name: 'ZF R3 2020',
+          picture: 'https://www.yamaha-motor.com.mx/images/motos/r3_2020_2.jpg',
+          price: 10,
           datails: 'Compra Protegida, recibe el producto que esperabas o te devolvemos tu dinero.',
-          marca: 'Nikon',
-          status: 5,
+          marca: 'Yamaha',
+          count: 5,
         },
         {
           id: 2,
-          name: 'Sony Dsc-h300 20 Mp',
-          picture: 'https://http2.mlstatic.com/camara-D_Q_NP_621585-MLM25970442208_092017-X.webp',
-          price: 3938,
+          name: 'FZ25 2020',
+          picture: 'https://static.wixstatic.com/media/30d7e1_a10a87206b5241afae63b097ce55dd41~mv2_d_1600_1200_s_2.jpg',
+          price: 5,
           datails: 'Compra Protegida, recibe el producto que esperabas o te devolvemos tu dinero.',
-          marca: 'Sony',
-          status: 6,
+          marca: 'Yamaha',
+          count: 6,
         },
         {
           id: 3,
-          name: 'Fujifilm X-t10 40.0 Mp',
-          picture: 'https://http2.mlstatic.com/camara-D_Q_NP_997939-MLM25733136676_072017-X.webp',
-          price: 18999,
+          name: 'MT03 2020',
+          picture: 'https://www.yamaha-motor.com.mx/images/motos/mt03_2020g2.jpg',
+          price: 2,
           datails: 'Compra Protegida, recibe el producto que esperabas o te devolvemos tu dinero.',
-          marca: 'Fujifilm',
-          status: 2,
+          marca: 'Yamaha',
+          count: 1,
         },
         {
           id: 4,
-          name: 'Reflex Canon Eos 30 ',
-          picture: 'https://http2.mlstatic.com/camara-D_Q_NP_743505-MLM25028787002_082016-X.webp',
-          price: 1000,
+          name: 'CMX500 2020',
+          picture: 'https://www.mundomotero.com/wp-content/uploads/2019/01/Honda-Rebel-2020.jpg',
+          price: 105000,
           datails: 'Compra Protegida, recibe el producto que esperabas o te devolvemos tu dinero.',
-          marca: 'Canon',
-          status: 6,
+          marca: 'Honda',
+          count: 6,
         },
         {
           id: 5,
@@ -56,7 +57,7 @@ class App extends Component {
           picture: 'https://images-na.ssl-images-amazon.com/images/I/91cMeS6xLHL._SX522_.jpg',
           price: 328,
           marca: 'Amazon',
-          status: 10,
+          count: 10,
         },
         {
           id: 6,
@@ -64,7 +65,7 @@ class App extends Component {
           picture: 'https://images-na.ssl-images-amazon.com/images/I/81vy-AiCWSL._AC_UL160_SR160,160_.jpg',
           price: 2733,
           marca: 'Olympus',
-          status: 4,
+          count: 4,
         },
         {
           id: 7,
@@ -72,7 +73,7 @@ class App extends Component {
           picture: 'https://images-na.ssl-images-amazon.com/images/G/33/aplusautomation/vendorimages/2ad656e6-6b25-48fd-af65-0a113979bc54.jpg._CB293876631__SR300,300_.jpg',
           price: 372,
           marca: 'Amazon',
-          status: 2,
+          count: 2,
         },
         {
           id: 8,
@@ -80,7 +81,7 @@ class App extends Component {
           picture: 'https://images-na.ssl-images-amazon.com/images/I/81tbbvcsJIL._AC_UL160_SR160,160_.jpg',
           price: 25023,
           marca: 'Fujinon',
-          status: 4,
+          count: 4,
         },
         {
           id: 9,
@@ -88,7 +89,7 @@ class App extends Component {
           picture: 'https://images-na.ssl-images-amazon.com/images/I/81CUJvIrFML._AC_UL160_SR160,160_.jpg',
           price: 50399,
           marca: 'Fujifilm',
-          status: 3,
+          count: 3,
         },
         {
           id: 10,
@@ -96,7 +97,7 @@ class App extends Component {
           picture: 'https://images-na.ssl-images-amazon.com/images/I/71dTWmH4vxL._SL1500_.jpg',
           price: 3262,
           marca: 'Panasonic',
-          status: 4,
+          count: 4,
         },
         {
           id: 11,
@@ -104,7 +105,7 @@ class App extends Component {
           picture: 'https://images-na.ssl-images-amazon.com/images/I/918N6QYcTjL._SL1500_.jpg',
           price: 18688,
           marca: 'Olympus',
-          status: 3,
+          count: 3,
         },
         {
           id: 12,
@@ -112,12 +113,11 @@ class App extends Component {
           picture: 'https://images-na.ssl-images-amazon.com/images/I/91in%2BYvDGtL._AC_UL160_SR160,160_.jpg',
           price: 32699,
           marca: 'Fujifilm',
-          status: 10,
+          count: 10,
         }
       ],
-      cart: [],
+      shoppingCar: [],
     }
-
     this.handleSaveProduct = this.handleSaveProduct.bind(this)
     this.handlerAddProduct = this.handlerAddProduct.bind(this)
     this.handlerRemoveProduct = this.handlerRemoveProduct.bind(this)
@@ -127,98 +127,134 @@ class App extends Component {
 
   handlerClearCart() {
     this.setState({
-      cart: [],
-      sum: 0,
-      total: 0
+      shoppingCar: [],
+      totalSale: 0,
+      totalBuy: 0,
+      openOrder: false
     });
   }
 
-  sumProducts(array) {
-    var total = 0
-    array.forEach(product => total += product.order)
-    this.setState({total: total})
+  sumTotalBuy(array) {
+    var totalt = 0
+    array.forEach(product => totalt += product.order)
+    this.setState({totalBuy: totalt})
+    //alert(array.length+'=>>'+ this.state.totalBuy +'|'+ totalt);
   }
 
-  sumTotal(array) {
-    var sum = 0
-    array.forEach(product => sum += product.total)
-    this.setState({sum: sum})
+  sumTotalSale(array) {
+    var suma = 0
+    array.forEach(product => suma += product.price) //product.price
+    this.setState({totalSale: suma})
+    //alert(array.length+'=>'+ this.state.totalSale +'|'+ suma);
   }
 
+  handlerRemoveProduct(productId) {
+    var statusCopy = Object.assign({}, this.state);
+    let product = this.state.products.find(p => p.id === productId);
+    let indexProduct = this.state.products.findIndex(x => x.id === productId)
+    let shoppingCar = this.state.shoppingCar.find(p => p.id === productId)
+    let indexCart = this.state.shoppingCar.findIndex(x => x.id === shoppingCar.id)
+
+    if(shoppingCar == null || shoppingCar==undefined){
+      return
+    }
+
+    statusCopy.shoppingCar[indexCart].price -= this.state.products[indexProduct].price
+    statusCopy.shoppingCar[indexCart].order -= 1
+    statusCopy.products[indexProduct].count += 1
+    
+    if(statusCopy.shoppingCar[indexCart].order===0){
+      statusCopy.shoppingCar.splice( indexCart, 1 );
+    }
+
+    this.setState(statusCopy)
+    this.sumTotalBuy(statusCopy.shoppingCar)
+    this.sumTotalSale(statusCopy.shoppingCar)
+    
+    alert('El producto fue eliminado del carrito de compras');
+  }
+
+  handleSaveProduct(productId) {	
+  	let product = this.state.products.find(p => p.id === productId);
+    let indexProduct = this.state.products.findIndex(x => x.id === product.id)
+    var exist = this.state.shoppingCar.find(p => p.id === productId)
+
+    if(product.count===0){
+      alert('Se agotaron los productos');
+      return
+    }
+
+    if (undefined !== exist && exist !== null) {
+      let indexCart = this.state.shoppingCar.findIndex(x => x.id === exist.id)
+      this.handlerAddProduct(indexCart, indexProduct)
+    }else{
+      this.handlerAddNewProduct(indexProduct, product);
+      var statusCopy = Object.assign({}, this.state);
+      this.sumTotalBuy(statusCopy.shoppingCar)
+      this.sumTotalSale(statusCopy.shoppingCar)
+    }
+
+  }
+  
   handlerAddProduct(indexCart, indexProduct){
     var statusCopy = Object.assign({}, this.state);
-    if (statusCopy.products[indexProduct].status !== 0) {
-      statusCopy.cart[indexCart].total += statusCopy.cart[indexCart].price
-      statusCopy.cart[indexCart].order += 1
-      statusCopy.products[indexProduct].status -= 1
+    if (statusCopy.products[indexProduct].count !== 0){
+      statusCopy.shoppingCar[indexCart].price += this.state.products[indexProduct].price
+      statusCopy.shoppingCar[indexCart].order += 1
+      statusCopy.products[indexProduct].count -= 1
       this.setState(statusCopy)
-      this.sumProducts(statusCopy.cart)
-      this.sumTotal(statusCopy.cart)
-    } else {
+      this.sumTotalBuy(statusCopy.shoppingCar)
+      this.sumTotalSale(statusCopy.shoppingCar)
+    }else{
       alert('Producto inexistente')
     }
   }
 
-  handlerRemoveProduct(productId) {
-    let product = this.state.products.find(p => p.id === productId);
-    let indexProduct = this.state.products.findIndex(x => x.id === product.id)
-    let cart = this.state.cart.find(p => p.id === productId)
-    let indexCart = this.state.cart.findIndex(x => x.id === cart.id)
-
-    var statusCopy = Object.assign({}, this.state);
-    if(statusCopy.cart[indexCart].total === statusCopy.cart[indexCart].price ){
-      indexCart !== -1 && statusCopy.cart.splice( indexCart, 1 );
-      this.setState(statusCopy)
-      alert('El producto fue eliminado del carrito de compras')
-    } else {
-      statusCopy.cart[indexCart].total -= statusCopy.cart[indexCart].price
-      statusCopy.products[indexProduct].status += 1
-      statusCopy.cart[indexCart].order -= 1
-      statusCopy.total -= 1
-      statusCopy.sum -= statusCopy.cart[indexCart].price
-      this.setState(statusCopy)
-    }
-  }
-
-  handleSaveProduct(productId) {
-    let product = this.state.products.find(p => p.id === productId);
-    let indexProduct = this.state.products.findIndex(x => x.id === product.id)
-
+  handlerAddNewProduct(indexProduct, product){    
     var productCart = {
       id: product.id,
       name: product.name,
       img: product.picture,
       price: product.price,
       order: 1,
-      total: product.price
+      totalSale: product.price
     }
 
-    var exist = this.state.cart.find(p => p.id === productId)
-    if (undefined !== exist && exist !== null) {
-      let indexCart = this.state.cart.findIndex(x => x.id === exist.id)
-      this.handlerAddProduct(indexCart, indexProduct)
-    }else{
-      var statusCopy = Object.assign({}, this.state);
-      statusCopy.products[indexProduct].status -= 1
-      this.sumProducts(statusCopy.cart)
-      this.sumTotal(statusCopy.cart)
-      this.setState({
-        cart: this.state.cart.concat([productCart]),
-        statusCopy
-      })
-    }
+    var statusCopy = Object.assign({}, this.state); //Ok
+    statusCopy.products[indexProduct].count -= 1
+    var xx = statusCopy.totalBuy+1
+    var xxx = statusCopy.totalSale+statusCopy.products[indexProduct].price
+    //this.setState({totalBuy: xx})
+    //this.setState({totalSale: xxx})
+    this.setState({shoppingCar: statusCopy.shoppingCar.concat([productCart]),statusCopy})
+    //statusCopy.shoppingCar.push({productCart});
+    //statusCopy=statusCopy.shoppingCar.concat([productCart])
+    alert('>>>'+statusCopy.shoppingCar.length+'<<<');
+    
+    
+    
+    this.setState({
+      shoppingCar: statusCopy.shoppingCar.concat([productCart])
+      ,statusCopy
+    })
+    
+
   }
 
   handlerOpenOrder(event) {
     event.preventDefault()
-    this.setState({ openOrder: true })
+    if(!this.state.openOrder){
+      this.setState({ openOrder: true })
+    }else{
+      this.setState({openOrder: false})
+    }
   }
 
   renderOpenOrder() {
     if (this.state.openOrder) {
       return (
         <Order
-          sum={this.state.sum}
+          totalSale={this.state.totalSale}
           onClearCart={this.handlerClearCart}
         />
       )
@@ -240,8 +276,8 @@ class App extends Component {
           </Grid.Column>
           <Grid.Column width={4}>
             <CartList
-              items={this.state.cart}
-              total={this.state.total}
+              items={this.state.shoppingCar}
+              totalBuy={this.state.totalBuy}
               onOpenOrder={this.handlerOpenOrder}
             />
             {this.renderOpenOrder()}
@@ -249,7 +285,9 @@ class App extends Component {
         </Grid>
       </Container>
     )
+	 alert('renderizado');
   }
+ 
 }
 
 export default App;

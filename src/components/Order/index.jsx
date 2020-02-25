@@ -9,7 +9,7 @@ function Order(props) {
       <Card.Content extra>
         <Statistic size='mini'>
           <Statistic.Value>
-            <Format number={props.sum}/>
+            <Format number={props.totalSale}/>
           </Statistic.Value>
         </Statistic>
         <Button

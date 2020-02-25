@@ -17,7 +17,7 @@ function ProductList(props) {
                   picture={p.picture}
                   price={p.price}
                   marca={p.marca}
-                  status={p.status}
+                  status={p.count}
                   onSaveProduct={() => props.onSaveProduct(p.id)}
                   onIncrementProduct={() => props.onIncrementProduct(p.id)}
                   onRemoveProduct={() => props.onRemoveProduct(p.id)}

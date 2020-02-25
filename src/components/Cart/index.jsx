@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Feed } from 'semantic-ui-react'
 
 
@@ -10,7 +10,7 @@ function Cart(props){
         <Feed.Content>
           <Feed.Date content={props.name} />
           <Feed.Summary>
-            $ {props.total} ({props.order} productos)
+            $ {props.totalBuy} [ {props.count} modelo(s) ]
           </Feed.Summary>
         </Feed.Content>
       </Feed.Event>

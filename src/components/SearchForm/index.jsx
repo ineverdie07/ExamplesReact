@@ -4,8 +4,8 @@ import { Input } from 'semantic-ui-react'
 function searchForm (props) {
     return(
       <Input
-        action={{ icon: 'search', color: 'teal' }}
-        placeholder='Search...' />
+        action={{ icon: 'write', color: 'teal' }}
+        placeholder='Buscar...' />
     )
 }
 
