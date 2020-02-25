@@ -189,9 +189,6 @@ class App extends Component {
       this.handlerAddProduct(indexCart, indexProduct)
     }else{
       this.handlerAddNewProduct(indexProduct, product);
-      var statusCopy = Object.assign({}, this.state);
-      this.sumTotalBuy(statusCopy.shoppingCar)
-      this.sumTotalSale(statusCopy.shoppingCar)
     }
 
   }
@@ -224,21 +221,13 @@ class App extends Component {
     statusCopy.products[indexProduct].count -= 1
     var xx = statusCopy.totalBuy+1
     var xxx = statusCopy.totalSale+statusCopy.products[indexProduct].price
-    //this.setState({totalBuy: xx})
-    //this.setState({totalSale: xxx})
-    this.setState({shoppingCar: statusCopy.shoppingCar.concat([productCart]),statusCopy})
-    //statusCopy.shoppingCar.push({productCart});
-    //statusCopy=statusCopy.shoppingCar.concat([productCart])
-    alert('>>>'+statusCopy.shoppingCar.length+'<<<');
-    
-    
     
     this.setState({
       shoppingCar: statusCopy.shoppingCar.concat([productCart])
       ,statusCopy
     })
-    
-
+    this.setState({totalBuy: xx})
+    this.setState({totalSale: xxx})
   }
 
   handlerOpenOrder(event) {
